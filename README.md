@@ -39,9 +39,95 @@ La aplicación se posiciona como un entorno de pruebas fundamental para evaluar 
 
 En resumen, la investigación y evaluación de EC2 y ECS como opciones de despliegue para la
 ## Arquitectura de la Aplicación
-## Funcionamiento
+### Arquitectura general
 
+El diseño de la arquitectura de la aplicación Bidify se ha planeado meticulosamente para asegurar una experiencia de usuario fluida y segura. Los clientes ingresarán a la aplicación a través de un navegador web, utilizando HTTPS para garantizar la seguridad de la comunicación. Esta interfaz de usuario está conectada a un frontend que interactúa con un backend mediante un API REST. El backend está compuesto por tres instancias de la aplicación, que pueden estar desplegadas en EC2 o en ECS, dependiendo del entorno de prueba. Cada una de estas instancias está dedicada a una entidad principal del sistema: Producto, Subasta y Usuario, asegurando una distribución clara y organizada de las responsabilidades y el procesamiento de datos.
+
+Cada instancia de la aplicación está configurada para comunicarse directamente con una base de datos MongoDB, alojada en MongoDB Atlas, lo que permite una gestión de datos centralizada y eficiente. Además, para garantizar la seguridad y la integridad de las comunicaciones, cada instancia cuenta con su propio keystore y truststore. Estas herramientas son esenciales para la gestión de certificados digitales y claves criptográficas, asegurando que las conexiones entre los componentes del sistema sean seguras y confiables.
+#### EC2
+![](/img/GeneralEC2.jpeg)
+#### ECS
+![](/img/GeneralECS.jpeg)
+### Arquitectura específica
+El experimento se diseñó para comparar el rendimiento de la aplicación Bidify utilizando dos entornos de despliegue diferentes: EC2 y ECS. En la arquitectura basada en EC2, los usuarios interactúan con la aplicación a través del navegador, enviando peticiones que son gestionadas por tres instancias de Bidify ejecutándose en instancias de EC2. Estas instancias están organizadas detrás de un balanceador de cargas, que distribuye las peticiones de manera equitativa entre ellas para garantizar la disponibilidad y el rendimiento. Cada una de estas instancias de la aplicación tiene acceso a una base de datos MongoDB, alojada en MongoDB Atlas, lo que permite la gestión centralizada de datos. Para el experimento, esta misma arquitectura fue replicada en ECS, donde en lugar de ejecutar las aplicaciones directamente en instancias EC2, se utilizaron contenedores gestionados por el servicio de contenedores ECS. Los contenedores de ECS, igual que las instancias EC2, están detrás de un balanceador de cargas y tienen acceso a la misma base de datos MongoDB en Atlas. El objetivo del experimento fue medir el tiempo que le toma al sistema procesar una función de subasta, donde varios usuarios realizan ofertas y se mide el tiempo de procesamiento en nanosegundos. Se realizaron múltiples pruebas con diferentes cantidades de ofertas para evaluar y comparar el rendimiento entre EC2 y ECS
+#### EC2
+![](/img/EspecificaEC2.jpeg)
+#### ECS
+![](/img/EspecificaECS.jpeg)
+
+
+## Funcionamiento
+Para el experimento, se diseñó una función de subasta donde múltiples usuarios realizarían ofertas, con la cantidad de ofertas como variable. Esta función simula el comportamiento del sistema al procesar estas ofertas y devuelve el tiempo que lleva realizar este procesamiento, medido en nanosegundos. Se optó por medir el tiempo de procesamiento como una métrica clave para evaluar el rendimiento del sistema bajo diferentes cargas de trabajo.
+
+![](/img/Evidencia.png)
+
+![](/img/EvidenciaECS.png)
+
+Al realizar pruebas en EC2 y ECS, se buscaba comparar el rendimiento y la escalabilidad de ambos entornos en el procesamiento de la función de subasta bajo diferentes cargas de trabajo, representadas por diferentes cantidades de ofertas. Este enfoque experimental permitiría determinar cuál de los dos entornos sería más adecuado para el despliegue de la aplicación de subasta, considerando factores como el tiempo de procesamiento, la escalabilidad y la eficiencia en el uso de recursos.
 ## ¿Cómo se realizó la instalación?
+### EC2
+Creamos una instancia de EC2 en AWS. Esta máquina cuenta con las siguientes características:
+
+![](/img/CaracteristicasVM.png)
+
+Nos conectamos a ella y realizamos las siguientes instalaciones.
+
+#### Git
+Para la instalación de Git (con el objetivo de clonar el repositorio para correr cada servicio respectivo) ejecutamos el siguiente comando:
+
+```
+    sudo yum install -y git
+```
+
+
+#### Java
+
+Para la instalación de Java, usaremos la versión 17 que es la que se estableció en el POM
+
+```
+    sudo yum install -y java-17-amazon-corretto-devel
+```
+
+#### Apache-Maven
+```
+    sudo wget https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+```
+
+```
+    sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+```
+
+```
+    sudo yum install -y apache-maven
+```
+Estas líneas de comandos son instrucciones para instalar Apache Maven en un sistema CentOS o Fedora utilizando el gestor de paquetes yum:
+
+1. Descarga del archivo de repositorio de Maven: Utiliza el comando wget para descargar el archivo de repositorio de Apache Maven desde el repositorio de Fedora People y lo guarda en el directorio /etc/yum.repos.d/ con el nombre epel-apache-maven.repo.
+
+2. Modificación del archivo de repositorio: Utiliza el comando sed para modificar el archivo de repositorio descargado, reemplazando la variable $releasever por 6. Esto se hace para especificar la versión de CentOS o Fedora que estás utilizando, ya que la variable $releasever se expandirá a la versión del sistema operativo.
+
+3. Instalación de Apache Maven: Utiliza el comando yum para instalar Apache Maven junto con todas sus dependencias, utilizando la opción -y para confirmar automáticamente todas las preguntas de instalación con "sí".
+
+### ECS
+1. **Preparación del Contenedor:** Primero, necesitamos empaquetar la aplicación Spring Boot en un contenedor Docker. Esto implica crear un Dockerfile que especifique cómo se debe construir el contenedor, incluyendo la instalación de las dependencias y la configuración del entorno.
+
+    ![](/img/docker.png)    
+
+2. **Registro de Contenedores:** Debemos subir el contenedor Docker a un registro de contenedores, como Amazon ECR (Amazon Elastic Container Registry). Esto nos permite almacenar y gestionar tus imágenes de contenedor de forma segura en la nube.
+
+    ![](/img/comandos.png)
+    
+    
+
+3. **Definición del Servicio ECS:** Luego, definimos un servicio ECS en la consola de administración de AWS. Esto implica configurar parámetros como el tipo de tarea, la capacidad de cómputo, las reglas de escalado automático y la integración con otros servicios de AWS, como el equilibrador de carga y los grupos de seguridad.
+
+4. **Configuración de la Tarea:** Creamos una definición de tarea ECS que especifica cómo se ejecutará el contenedor. Esto incluye la configuración de los recursos de la tarea, como la CPU y la memoria, así como la asignación de puertos y la configuración de variables de entorno.
+
+5. **Despliegue de la Aplicación:** Una vez configurado el servicio y la tarea ECS, podemos desplegar la aplicación Spring Boot en ECS utilizando la consola de administración de AWS o herramientas de línea de comandos como AWS CLI. ECS se encargará de gestionar la infraestructura subyacente y garantizar que la aplicación esté en funcionamiento y escalada según sea necesario.
+   
+      ![](/img/consola.png)
+
+6. **Monitoreo y Escalado:** Finalmente, podemos monitorear el rendimiento de la aplicación utilizando servicios como Amazon CloudWatch y configurar reglas de escalado automático para ajustar la capacidad de cómputo del servicio ECS en función de la demanda de tráfico.
 
 ## Resultados del experimento
 
