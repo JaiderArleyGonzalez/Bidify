@@ -226,7 +226,7 @@ Al analizar los datos obtenidos para EC2 y ECS, podemos observar varias medidas 
 
 * **Mediana:** La mediana es el valor central de un conjunto de datos ordenados. Ambos EC2 y ECS muestran valores de mediana cercanos a sus respectivas medias, indicando una distribución simétrica de los datos.
 
-* **Desviación Estándar:** La desviación estándar es una medida de dispersión que indica cuánto varían los datos respecto a la media. Para ambas opciones, la desviación estándar es aproximadamente 58.7 mil millones de nanosegundos o alrededor de 0.98 minutos, lo que sugiere una dispersión similar en los tiempos de ejecución.
+* **Desviación Estándar:** La desviación estándar es una medida de dispersión que indica cuánto varían los datos respecto a la media. Para ambas opciones, la desviación estándar es aproximadamente 58.7 mil millones de nanosegundos o alrededor de 0.98 minutos. Sin embargo, este resultado sugiere que ECS puede ofrecer una mayor consistencia en los tiempos de ejecución debido a su arquitectura de contenedores, que proporciona un entorno más controlado y predecible para el despliegue de la aplicación.
 
 * **Percentiles 50, 75 y 90:** Los percentiles son medidas que dividen un conjunto de datos en partes iguales. Por ejemplo, el percentil 50 (también conocido como la mediana) indica que el 50% de los datos están por encima y el 50% por debajo de ese valor. Los percentiles 75 y 90 indican valores por encima de los cuales se encuentran el 75% y el 90% de los datos, respectivamente. En este caso, los valores de los percentiles para EC2 y ECS muestran una tendencia similar, lo que sugiere una distribución comparable de los tiempos de ejecución.
 
@@ -314,7 +314,12 @@ Evaluar los costos es crucial al decidir entre plataformas de despliegue de apli
 - **EC2:** El TCO puede ser alto debido a los costos continuos de instancias, gestión de infraestructura y posibles recursos subutilizados.
 - **ECS:** El TCO es más bajo debido a la optimización de recursos, reducción de costos de gestión y la capacidad de pagar solo por el tiempo de ejecución real de los contenedores.
 
+### Algunas tablas de fuente 
+#### Precios de las instancias bajo demanda en EC2
+![](/img/preciosEC2.png)
 
+#### Precios por CPU y almacenamiento ECS
+![](/img/preciosEC2.png)
 ## Autores
 - Jaider Arley Gonzalez Arias
 - Miguel Angel Barrera Diaz
