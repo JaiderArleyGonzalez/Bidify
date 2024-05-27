@@ -319,7 +319,7 @@ Evaluar los costos es crucial al decidir entre plataformas de despliegue de apli
 ![](/img/preciosEC2.png)
 
 #### Precios por CPU y almacenamiento ECS
-![](/img/preciosEC2.png)
+![](/img/PreciosECS.png)
 ## Autores
 - Jaider Arley Gonzalez Arias
 - Miguel Angel Barrera Diaz
