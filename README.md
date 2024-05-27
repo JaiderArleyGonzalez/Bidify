@@ -61,7 +61,11 @@ Para el experimento, se diseñó una función de subasta donde múltiples usuari
 
 ![](/img/Evidencia.png)
 
+https://github.com/JaiderArleyGonzalez/Bidify/assets/89174283/9fe0a829-f802-4b72-b813-faec6b01627e
+
 ![](/img/EvidenciaECS.png)
+
+https://github.com/JaiderArleyGonzalez/Bidify/assets/89174283/de678806-81c6-4686-9807-ae38d521c31b
 
 Al realizar pruebas en EC2 y ECS, se buscaba comparar el rendimiento y la escalabilidad de ambos entornos en el procesamiento de la función de subasta bajo diferentes cargas de trabajo, representadas por diferentes cantidades de ofertas. Este enfoque experimental permitiría determinar cuál de los dos entornos sería más adecuado para el despliegue de la aplicación de subasta, considerando factores como el tiempo de procesamiento, la escalabilidad y la eficiencia en el uso de recursos.
 ## ¿Cómo se realizó la instalación?
