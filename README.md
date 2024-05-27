@@ -1,15 +1,15 @@
-# Bidify
+# Bidify 🚀
 Bidify es una innovadora plataforma de subastas en línea diseñada para transformar la forma en que compramos y vendemos productos. Esta aplicación ofrece una experiencia emocionante tanto para vendedores como para compradores, facilitando la compra y venta de artículos a través de subastas dinámicas.
-## Descripción del Programa
+## Descripción del Programa 📝
 Bidify permite a los usuarios listar productos para la venta y establecer un precio inicial. Una vez que el producto está listado, los compradores pueden hacer ofertas competitivas, elevando el precio hasta que la subasta finalice. El comprador con la oferta más alta al cierre de la subasta se adjudica el producto.
-## Características Principales
+## Características Principales 📋
 * **Registro de Productos:** Los vendedores pueden registrar fácilmente sus productos, establecer un precio inicial y definir la duración de la subasta.
 * **Pujas en Tiempo Real:** Los compradores pueden hacer ofertas en tiempo real, compitiendo con otros usuarios para adquirir el producto deseado.
 * **Sistema de Notificaciones:** Tanto compradores como vendedores reciben notificaciones sobre el estado de sus subastas, asegurando que estén siempre informados sobre las últimas ofertas.
 * **Historial de Transacciones:** Los usuarios pueden revisar sus actividades pasadas, incluyendo subastas ganadas y productos vendidos.
 
 La concurrencia en la aplicación se maneja mediante el uso de mecanismos de sincronización y estructuras de datos seguras para múltiples hilos, lo que garantiza que múltiples usuarios puedan interactuar con la plataforma en tiempo real sin conflictos. Cuando varios usuarios realizan acciones como hacer ofertas, registrar productos o recibir notificaciones, la aplicación utiliza bloqueos y colas de mensajes para coordinar estas operaciones, evitando condiciones de carrera y asegurando la integridad de los datos. Además, se implementan transacciones atómicas en la base de datos para mantener la consistencia y la precisión de las subastas, asegurando que cada puja y actualización de estado se procesen correctamente sin interferencias.
-## Prerrequisitos
+## Prerrequisitos 🔍
 Necesitarás tener instaladas las siguientes herramientas y dependencias:
 
 * **Java Development Kit (JDK) 17:** Asegúrate de tener instalado el JDK 17 en tu sistema. Puedes descargarlo e instalarlo desde el sitio web oficial de Oracle o utilizar una distribución OpenJDK.
@@ -20,14 +20,14 @@ Necesitarás tener instaladas las siguientes herramientas y dependencias:
 
 * **Spring Boot:** Al utilizar Spring Boot, la aplicación se ejecutará en un servidor de aplicaciones embebido, por lo que no necesitarás instalar un servidor de aplicaciones por separado. Spring Boot manejará todo el ciclo de vida de la aplicación.
 
-## Desarrollo Experimental
+## Desarrollo Experimental 🧪
 La aplicación se posiciona como un entorno de pruebas fundamental para evaluar dos enfoques de despliegue en la nube: Amazon EC2 y Amazon ECS.
 
 **EC2 (Elastic Compute Cloud):** Este servicio de cómputo en la nube de Amazon Web Services (AWS) proporciona una infraestructura escalable y segura para alojar aplicaciones web. EC2 permite a los usuarios lanzar y gestionar instancias virtuales, lo que brinda un alto grado de flexibilidad y control sobre el entorno de ejecución de la aplicación. Cada instancia EC2 puede personalizarse según los requisitos de la aplicación, desde la capacidad de procesamiento hasta la configuración del sistema operativo y las redes.
 
 **ECS (Elastic Container Service):** Por otro lado, ECS es un servicio de orquestación de contenedores que simplifica la gestión y el despliegue de aplicaciones basadas en contenedores en AWS. Utilizando ECS, los desarrolladores pueden encapsular su aplicación en contenedores Docker y luego desplegarla de manera eficiente en un clúster de instancias EC2 gestionado por ECS. Este enfoque proporciona una mayor portabilidad, escalabilidad y facilidad de administración, ya que ECS se encarga de tareas como la programación de contenedores, la gestión de clústeres y la escalabilidad automática.
 
-## ¿Por qué comparar EC2 con ECS?
+## ¿Por qué comparar EC2 con ECS? 🔍
 
 **Evaluación de rendimiento:** Comparar el rendimiento y la escalabilidad de la aplicación en ambos entornos puede ayudar a identificar cuál ofrece un mejor desempeño en términos de tiempo de respuesta, capacidad de carga y rendimiento general.
 
@@ -38,7 +38,7 @@ La aplicación se posiciona como un entorno de pruebas fundamental para evaluar 
 **Escalabilidad y disponibilidad:** Evaluar la capacidad de cada enfoque para escalar horizontal y verticalmente, así como su capacidad para garantizar la disponibilidad y la tolerancia a fallos, es esencial para determinar cuál es más adecuado para las necesidades de la aplicación Bidify.
 
 En resumen, la investigación y evaluación de EC2 y ECS como opciones de despliegue para la
-## Arquitectura de la Aplicación
+## Arquitectura de la Aplicación 🏗️
 ### Arquitectura general
 
 El diseño de la arquitectura de la aplicación Bidify se ha planeado meticulosamente para asegurar una experiencia de usuario fluida y segura. Los clientes ingresarán a la aplicación a través de un navegador web, utilizando HTTPS para garantizar la seguridad de la comunicación. Esta interfaz de usuario está conectada a un frontend que interactúa con un backend mediante un API REST. El backend está compuesto por tres instancias de la aplicación, que pueden estar desplegadas en EC2 o en ECS, dependiendo del entorno de prueba. Cada una de estas instancias está dedicada a una entidad principal del sistema: Producto, Subasta y Usuario, asegurando una distribución clara y organizada de las responsabilidades y el procesamiento de datos.
@@ -56,7 +56,7 @@ El experimento se diseñó para comparar el rendimiento de la aplicación Bidify
 ![](/img/EspecificaECS.jpeg)
 
 
-## Funcionamiento
+## Funcionamiento ⚙️
 Para el experimento, se diseñó una función de subasta donde múltiples usuarios realizarían ofertas, con la cantidad de ofertas como variable. Esta función simula el comportamiento del sistema al procesar estas ofertas y devuelve el tiempo que lleva realizar este procesamiento, medido en nanosegundos. Se optó por medir el tiempo de procesamiento como una métrica clave para evaluar el rendimiento del sistema bajo diferentes cargas de trabajo.
 
 ![](/img/Evidencia.png)
@@ -68,7 +68,7 @@ https://github.com/JaiderArleyGonzalez/Bidify/assets/89174283/9fe0a829-f802-4b72
 https://github.com/JaiderArleyGonzalez/Bidify/assets/89174283/de678806-81c6-4686-9807-ae38d521c31b
 
 Al realizar pruebas en EC2 y ECS, se buscaba comparar el rendimiento y la escalabilidad de ambos entornos en el procesamiento de la función de subasta bajo diferentes cargas de trabajo, representadas por diferentes cantidades de ofertas. Este enfoque experimental permitiría determinar cuál de los dos entornos sería más adecuado para el despliegue de la aplicación de subasta, considerando factores como el tiempo de procesamiento, la escalabilidad y la eficiencia en el uso de recursos.
-## ¿Cómo se realizó la instalación?
+## ¿Cómo se realizó la instalación? 🛠️
 ### EC2
 Creamos una instancia de EC2 en AWS. Esta máquina cuenta con las siguientes características:
 
@@ -219,7 +219,7 @@ Estas líneas de comandos son instrucciones para instalar Apache Maven en un sis
 | Percentil 75     | 1,50605E+11  | 2.510091147  |
 | Percentil 90     | 1,79134E+11  | 2.985560804  |
 
-## Análisis
+## Análisis 📊
 Al analizar los datos obtenidos para EC2 y ECS, podemos observar varias medidas estadísticas importantes que nos permiten comparar el rendimiento de ambas opciones de despliegue en la nube.
 
 * **Media:** La media representa el valor promedio de los tiempos de ejecución de las operaciones en nanosegundos y minutos. En este caso, tanto para EC2 como para ECS, la media está en el orden de 1,03E+11 nanosegundos o aproximadamente 1,73 minutos, lo que sugiere un rendimiento similar en términos de velocidad promedio de procesamiento.
@@ -231,6 +231,89 @@ Al analizar los datos obtenidos para EC2 y ECS, podemos observar varias medidas 
 * **Percentiles 50, 75 y 90:** Los percentiles son medidas que dividen un conjunto de datos en partes iguales. Por ejemplo, el percentil 50 (también conocido como la mediana) indica que el 50% de los datos están por encima y el 50% por debajo de ese valor. Los percentiles 75 y 90 indican valores por encima de los cuales se encuentran el 75% y el 90% de los datos, respectivamente. En este caso, los valores de los percentiles para EC2 y ECS muestran una tendencia similar, lo que sugiere una distribución comparable de los tiempos de ejecución.
 
 Basándonos en estos resultados, aunque EC2 y ECS muestran un rendimiento similar en términos de velocidad promedio y distribución de los tiempos de ejecución, la diferencia principal radica en la gestión de la infraestructura y la escalabilidad. ECS ofrece una gestión simplificada y automatizada de contenedores, integración nativa con otros servicios de AWS, como Elastic Load Balancing y Auto Scaling, lo que facilita el despliegue y la gestión de aplicaciones a gran escala. Además, ECS proporciona una mayor flexibilidad en términos de arquitectura de aplicaciones, lo que permite adaptarse mejor a las necesidades específicas de cada proyecto. Aunque ambos servicios pueden ofrecer un rendimiento comparable, ECS emerge como la opción preferida debido a su mayor facilidad de gestión, escalabilidad y flexibilidad en el despliegue de aplicaciones en la nube.
+### Análisis de Escalabilidad 📈
+
+La escalabilidad es una característica fundamental al evaluar plataformas para desplegar aplicaciones. A continuación, se presenta un análisis detallado de la escalabilidad de EC2 y ECS, destacando sus puntos fuertes y débiles en un formato competitivo.
+
+#### **EC2 (Amazon Elastic Compute Cloud)**
+
+**Puntos Fuertes:**
+1. **Control Completo del Servidor:** EC2 proporciona a los usuarios control total sobre las instancias, lo que permite configuraciones personalizadas y ajustes específicos de rendimiento.
+2. **Variedad de Tipos de Instancias:** EC2 ofrece una amplia gama de tipos de instancias optimizadas para diferentes cargas de trabajo, permitiendo a las empresas elegir las instancias que mejor se adapten a sus necesidades.
+3. **Escalado Automático:** Con Amazon EC2 Auto Scaling, las instancias pueden escalar automáticamente en respuesta a las demandas del tráfico, asegurando que los recursos estén disponibles cuando se necesiten.
+
+**Puntos Débiles:**
+1. **Complejidad en la Gestión:** El control total viene con la responsabilidad de gestionar la infraestructura, incluyendo actualizaciones, parches y configuración del sistema operativo.
+2. **Costos de Escalabilidad:** A medida que las necesidades de escalabilidad aumentan, los costos de ejecutar múltiples instancias de EC2 pueden incrementarse significativamente.
+3. **Tiempo de Provisionamiento:** Aunque EC2 puede escalar rápidamente, el tiempo necesario para provisionar y configurar nuevas instancias puede ser mayor en comparación con soluciones de contenedores.
+
+#### **ECS (Amazon Elastic Container Service)**
+
+**Puntos Fuertes:**
+1. **Gestión Simplificada:** ECS maneja muchas de las complejidades de la infraestructura subyacente, permitiendo a los desarrolladores centrarse en la lógica de la aplicación.
+2. **Escalabilidad Rápida y Eficiente:** ECS permite un escalado rápido y eficiente de contenedores, facilitando la gestión de picos de tráfico de forma más ágil que las instancias tradicionales.
+3. **Optimización de Recursos:** Los contenedores permiten una mejor utilización de los recursos, ya que múltiples contenedores pueden compartir la misma instancia subyacente, reduciendo costos y aumentando la eficiencia.
+4. **Integración con Fargate:** Utilizando Fargate, ECS puede ejecutar contenedores sin necesidad de gestionar servidores, escalando de manera automática y optimizando aún más la gestión de recursos.
+
+**Puntos Débiles:**
+1. **Curva de Aprendizaje:** La transición a un entorno basado en contenedores puede requerir una curva de aprendizaje y la adaptación de nuevas prácticas de desarrollo y despliegue.
+2. **Dependencia de Servicios Adicionales:** Aunque ECS simplifica la gestión, puede haber una dependencia de otros servicios de AWS para optimizar el rendimiento y la escalabilidad, como AWS Fargate o Elastic Load Balancing.
+
+### **Comparación Directa**
+
+**Escalado Horizontal:**
+- **EC2:** La escalabilidad horizontal en EC2 implica la adición de más instancias según la demanda. Esto requiere configuración y gestión del balanceo de cargas para distribuir el tráfico.
+- **ECS:** ECS facilita el escalado horizontal al permitir que los contenedores se inicien y terminen rápidamente en respuesta a cambios en la carga de trabajo, con un balanceo de cargas que se ajusta dinámicamente.
+
+**Tiempo de Respuesta y Provisionamiento:**
+- **EC2:** La provisión de nuevas instancias EC2 puede llevar varios minutos, lo cual puede ser un impedimento en situaciones de escalado rápido.
+- **ECS:** Los contenedores en ECS pueden iniciarse en segundos, permitiendo una respuesta mucho más rápida a los cambios en la carga de trabajo.
+
+**Costos:**
+- **EC2:** Los costos pueden aumentar significativamente a medida que se agregan más instancias para manejar la carga, debido a la necesidad de pagar por recursos dedicados y subutilizados.
+- **ECS:** ECS permite una mayor densidad de aplicaciones en menos instancias subyacentes, lo que puede reducir costos al maximizar el uso de recursos.
+### Análisis de Costos 💰🏆
+
+Evaluar los costos es crucial al decidir entre plataformas de despliegue de aplicaciones. A continuación, se presenta un análisis detallado de los costos asociados con EC2 y ECS, destacando sus ventajas y desventajas en términos de gastos.
+
+#### **EC2 (Amazon Elastic Compute Cloud) ☁️**
+
+**Puntos Fuertes:**
+1. **Precios Flexibles 💸:** EC2 ofrece una variedad de opciones de precios, incluidas instancias bajo demanda, instancias reservadas y spot instances, permitiendo flexibilidad en el costo según las necesidades.
+2. **Control de Costos 📉:** Al tener control total sobre las instancias, es posible optimizar el uso de recursos y apagar instancias cuando no se necesiten para ahorrar costos.
+3. **Escalado Programado ⏰:** La capacidad de programar el escalado permite gestionar costos al aumentar o disminuir las instancias en horarios específicos.
+
+**Puntos Débiles:**
+1. **Costos Fijos y Variables 📈:** Los costos pueden acumularse rápidamente, especialmente con instancias bajo demanda y la necesidad de mantener múltiples instancias operativas para alta disponibilidad.
+2. **Infraestructura Subutilizada ⚠️:** A menudo, las instancias de EC2 pueden no utilizar toda su capacidad, llevando a costos innecesarios por recursos no utilizados.
+3. **Costos de Gestión y Mantenimiento 🔧:** La necesidad de gestionar y mantener la infraestructura puede aumentar los costos operativos, especialmente en términos de tiempo y recursos humanos.
+
+#### **ECS (Amazon Elastic Container Service) 🐳**
+
+**Puntos Fuertes:**
+1. **Optimización de Recursos 📊:** ECS permite ejecutar múltiples contenedores en una sola instancia, optimizando el uso de recursos y reduciendo costos.
+2. **Escalado Eficiente 🔄:** El escalado automático de contenedores en ECS permite ajustar los recursos según la demanda, asegurando que solo se pague por lo que realmente se utiliza.
+3. **Ahorros con Fargate 💵:** Utilizando Fargate, no hay necesidad de gestionar servidores, lo que reduce los costos asociados con la administración de infraestructura.
+4. **Facturación por Segundo ⏳:** ECS con Fargate factura por segundo, lo que permite un ahorro significativo al pagar solo por el tiempo de ejecución exacto de los contenedores.
+
+**Puntos Débiles:**
+1. **Costos Adicionales de Servicios ➕:** Aunque ECS reduce costos de gestión, puede haber costos adicionales asociados con servicios complementarios como balanceadores de carga y almacenamiento.
+2. **Costo de Migración 🚚:** La transición a un entorno de contenedores puede implicar costos iniciales de migración y capacitación del personal.
+
+### **Comparación Directa ⚔️**
+
+**Costos Operativos 💲:**
+- **EC2:** Los costos operativos incluyen el pago por instancias bajo demanda, almacenamiento, y ancho de banda, así como el tiempo de gestión y mantenimiento de la infraestructura.
+- **ECS:** Los costos operativos son más bajos debido a la mejor utilización de recursos y la facturación precisa por segundo, especialmente cuando se utiliza Fargate.
+
+**Ahorro en Escalabilidad 📈:**
+- **EC2:** Escalar con EC2 puede resultar costoso, ya que cada instancia adicional implica un costo fijo, independientemente del uso real.
+- **ECS:** Escalar con ECS es más eficiente en costos, ya que permite ajustar la cantidad de contenedores según la demanda y maximizar el uso de instancias subyacentes.
+
+**Costo Total de Propiedad (TCO) 🏷️:**
+- **EC2:** El TCO puede ser alto debido a los costos continuos de instancias, gestión de infraestructura y posibles recursos subutilizados.
+- **ECS:** El TCO es más bajo debido a la optimización de recursos, reducción de costos de gestión y la capacidad de pagar solo por el tiempo de ejecución real de los contenedores.
+
 
 ## Autores
 - Jaider Arley Gonzalez Arias
